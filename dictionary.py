@@ -1,6 +1,6 @@
 from pathlib import Path                                                        # used to make file path compatible with all type of operating system
 
-data_folder = Path("data/")                                                     # one can also use d:\\udemy\\python15Project\\proj2\\data in windows
+data_folder = Path("data/")                                                     # one can also use <diskname>:\\<fulllocation>\\data in windows
 
 import json
 
@@ -12,23 +12,6 @@ with open(file_to_open) as f:
     data = json.load(f)
 
 word = word.upper()
-# print("MEANINGS:\n\t{}".format(data[word]['MEANINGS']))
-# print("ANTONYMS:\n\t{}".format(data[word]['ANTONYMS']))
-# print("SYNONYMS:\n\t{}".format(data[word]['SYNONYMS']))
-# print(data[word])
-
-# if word in data:
-#     print("\nWord:", word)
-#
-#     print("\nMEANINGS:")
-#     for key in data[word]['MEANINGS']:
-#         print('\t', key + ':')  #, data[word]['MEANINGS'][key])
-#         for i in data[word]['MEANINGS'][key]:
-#             print('\t\t',i)
-#     print("ANTONYMS:\n\t{}".format(data[word]['ANTONYMS']))
-#     print("SYNONYMS:\n\t{}".format(data[word]['SYNONYMS']))
-# else:
-#     print("No definition present.")
 
 def printNestedDefinition(word):
     if isinstance(word, list):
@@ -76,12 +59,6 @@ def translate(word):
     printAntonyms(data[word])
     printSynonyms(data[word])
 
-# import bisect
-
-# def find_closest(data, expected):
-#     res = bisect.bisect_left(list(data.keys()), expected)
-#     return res
-
 from difflib import get_close_matches
 
 def find_closest(data, expected):
@@ -99,9 +76,9 @@ def mapToExistingData(word):
         print("\nNo definition present for your input \"{}\". Now showing close result: ".format(word)+"\nDo you want to continue with \"{}\" word.".format(find_closest(data, word)[0]))
         decide = input("Press \'y\' for yes and \'n\' for no: ")
         if decide == 'y':
-            # find_closest(data, word)
+            
             closeWord = find_closest(data,word)
-            # translate(list(data)[closeWord-1])                                    Use when use bisect library
+            
             firstClose = closeWord[0]
             translate(firstClose)
         elif decide == 'n':
